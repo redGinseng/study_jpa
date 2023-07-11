@@ -1,5 +1,6 @@
 package jpa.start.entity;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -30,6 +31,11 @@ public class Member {
     // 연관관계 설정
     public void setTeam(final Team team) {
         this.team = team;
+
+        if (this.team != null) {
+            this.team.getMembers().remove(this);
+        }
+        team.setMembers(List.of(this));
     }
 
     public String getId() {
