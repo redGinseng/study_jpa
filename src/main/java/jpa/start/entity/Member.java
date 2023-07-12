@@ -1,10 +1,13 @@
 package jpa.start.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -19,6 +22,11 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @ManyToMany
+    @JoinTable(name = "MEMBER_PRODUCT", joinColumns = @JoinColumn(name = "MEMBER_ID"),
+        inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    private List<Product> product = new ArrayList<Product>();
 
     public Member() {
     }
